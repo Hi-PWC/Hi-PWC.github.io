@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中秋诗句展示</title>
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #000;
+        }
+
+        #loading {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-size: 24px;
+            z-index: 10;
+            /* 确保加载中文字在最上层 */
+        }
+
+        #background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 5;
+            /* 确保视频在加载文字下层 */
+            display: none;
+            /* 初始状态隐藏 */
+        }
+
+        #background video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        #poem {
+            position: relative;
+            color: #fff;
+            font-size: 24px;
+            display: none;
+            z-index: 20;
+            /* 确保诗句在最上层 */
+        }
+
+        #startButton {
+            position: absolute;
+            z-index: 30;
+            padding: 10px 20px;
+            font-size: 24px;
+            cursor: pointer;
+            display: none;
+            /* 初始状态隐藏 */
+            background: none;
+            /* 去除背景颜色 */
+            border: none;
+            /* 去除边框 */
+            color: #fff;
+            /* 设置文字颜色为白色 */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loading">加载中...</div>
+    <div id="background">
+        <video id="background-video" src="./img/bg.mp4" muted loop></video> <!-- 添加视频文件 -->
+    </div>
+    <div id="poem"></div>
+    <button id="startButton">开始</button>
+    <audio id="background-music" src="./img/bg.mp3"></audio> <!-- 添加音乐文件 -->
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            console.log("DOM content loaded");
+            // 模拟资源加载
+            setTimeout(function () {
+                console.log("Loading complete");
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('startButton').style.display = 'block';
+            }, 3000); // 模拟加载时间
+
+            document.getElementById('startButton').addEventListener('click', function () {
+                console.log("Button clicked");
+                this.style.display = 'none';
+                const background = document.getElementById('background');
+                const backgroundVideo = document.getElementById('background-video');
+                const poemContainer = document.getElementById('poem');
+                const music = document.getElementById('background-music');
+                background.style.display = 'block'; // 显示背景视频容器
+                backgroundVideo.play(); // 播放背景视频
+                poemContainer.style.display = 'block';
+                music.play(); // 播放音乐
+                setTimeout(showPoem, 2800); // 延时3秒后显示诗句
+            });
+
+            function showPoem() {
+                console.log("Displaying poem");
+                const poem1 = "白云一片去悠悠，青枫浦上不胜愁。谁家今夜扁舟子？何处相思明月楼？";
+                const poem2 = "丹~  中秋节快乐呀！";
+                const poem3 = "接下来就请你看看我做的这个ai背景，我觉得挺好看的，哈哈"; // 添加第三段文字
+                const poemContainer = document.getElementById('poem');
+                let index = 0;
+
+                function typePoem(poem, callback) {
+                    if (index < poem.length) {
+                        poemContainer.innerHTML += poem[index];
+                        index++;
+                        setTimeout(() => typePoem(poem, callback), 400); // 控制字出现的速度
+                    } else if (callback) {
+                        setTimeout(callback, 1000); // 等待1秒后执行回调
+                    }
+                }
+
+                function clearPoemAndTypeNext(poem, nextPoem, nextCallback) {
+                    poemContainer.innerHTML = "";
+                    index = 0;
+                    typePoem(poem, nextCallback);
+                }
+
+                function startThirdPoem() {
+                    poemContainer.innerHTML = "";
+                    index = 0;
+                    typePoem(poem3, () => {
+                        setTimeout(() => {
+                            poemContainer.innerHTML = ""; // 延时3秒后清除文字
+                        }, 3000);
+                    });
+                }
+
+                typePoem(poem1, () => clearPoemAndTypeNext(poem2, poem3, startThirdPoem));
+            }
+
+
+
+
+        });
+    </script>
+</body>
+
+</html>
