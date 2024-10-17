@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>照片墙</title>
+    <link href="./CSS/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./CSS/bootstrap.min.css">
+    <link rel="stylesheet" href="./CSS/personal-info-main.css">
+    <link rel="stylesheet" href="./CSS/personal-info-animate.css">
+    <link rel="stylesheet" href="./CSS/animate.min.css">
+    <link href="./CSS/aos.css" rel="stylesheet">
+    <style>
+        /* 设置背景图片并使其铺满 */
+        body {
+            background-image: url('./images/intro-bg.jpg'); /* 替换为实际背景图片路径 */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page-header" style="margin-top: -2.5%;">
+        <nav class="navbar navbar-expand-md bg-primary navbar-dark">
+            <div class="container-fluid container">
+                <a class="navbar-brand log" href="#"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
+                    <ul class="nav navbar-nav" >
+                        <li class="nav-item"><a class="nav-link" href="./index.html">基本资料</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./info.html">基本资料</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./work.html">作品展示</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./skill.html">获奖经验</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./photo.html">照片墙</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    
+    <div class="container" >
+        <h1 class="text-center my-4" style="color: aliceblue; height: 10%;">&nbsp;</h1>
+        <div class="row" id="photo-wall">
+            <!-- 照片将通过JavaScript动态渲染 -->
+        </div>
+    </div>
+
+    <!-- 引入Bootstrap JS（可选） -->
+    <script src="./JS/jquery-3.6.0.js"></script>
+    <script src="./JS/popper.min.js"></script>
+    <script src="./JS/bootstrap.min.js"></script>
+    <script>
+        // JavaScript部分
+        const photos = [
+            {src: "./images/img/img (10).jpg", title: "自己拍的风景-苍山", description: "随手拍01"},
+            {src: "./images/img/img (2).jpg", title: "自己拍的风景-校园", description: "随手拍02"},
+            {src: "./images/img/img (3).jpg", title: "自己拍的风景-校园", description: "随手拍03"},
+            {src: "./images/img/img (4).jpg", title: "自己拍的风景-校园", description: "随手拍04"},
+            {src: "./images/img/img (5).jpg", title: "自己拍的风景-校园", description: "随手拍05"},
+            {src: "./images/img/img (6).jpg", title: "自己拍的风景-洱海", description: "随手拍06"},
+            {src: "./images/img/img (7).jpg", title: "自己拍的风景-苍山", description: "随手拍07"},
+            {src: "./images/img/img (8).jpg", title: "自己拍的风景-清晨", description: "随手拍08"},
+            {src: "./images/img/img (9).jpg", title: "自己拍的风景-傍晚", description: "随手拍09"},
+            // 可以继续添加更多照片对象
+        ];
+
+        const photoWall = document.getElementById("photo-wall");
+
+        photos.forEach(photo => {
+            const col = document.createElement("div");
+            col.className = "col-md-4 mb-4";
+            
+            const card = document.createElement("div");
+            card.className = "card";
+            
+            const img = document.createElement("img");
+            img.src = photo.src;
+            img.className = "card-img-top";
+            img.alt = photo.title;
+            
+            const cardBody = document.createElement("div");
+            cardBody.className = "card-body";
+            
+            const cardTitle = document.createElement("h5");
+            cardTitle.className = "card-title";
+            cardTitle.textContent = photo.title;
+            
+            const cardText = document.createElement("p");
+            cardText.className = "card-text";
+            cardText.textContent = photo.description;
+            
+            cardBody.appendChild(cardTitle);
+            cardBody.appendChild(cardText);
+            card.appendChild(img);
+            card.appendChild(cardBody);
+            col.appendChild(card);
+            photoWall.appendChild(col);
+        });
+    </script>
+</body>
+</html>
