@@ -2,9 +2,7 @@ function addScript(url) {
     document.write("<script language=javascript src=./config/config.js></script>");
 }
 addScript();
-//不使用配置文件请注释点上面代码
 
-//星光依旧灿烂，激情仍然燃烧。因为有梦想，所以我存在。你在你的领域里不惜青春，我在我的道路上不知疲倦。
 $(function () {
     if (config) {
         $(".name").html(config.name);
@@ -35,7 +33,7 @@ $(function () {
         });
         $(".others-section").css("background", "url(" + config.url[3] + ")");
         $(".desc").html(config.skills_description);
-        //------E-------
+
 
 
         if (config.skills) {
@@ -145,19 +143,7 @@ $(function () {
             }
         }
 
-        if (config.icon) {
-            for (let i = 0; i < config.icon.length; i++) {
-                let img = config.icon[i][0];
-                let url = config.icon[i][1];
-                let desc = config.icon[i][2];
-                $(".icon-insert").append(
-                    "<a class=\"my-tooltip\" href=\"" + url + "\" title=\"访问我的社交平台\">\n" +
-                    "    <img src=\"" + img + "\" alt=\"\">\n" +
-                    "    <span class=\"my-tooltiptext\">" + desc + "</span>\n" +
-                    "</a>"
-                );
-            }
-        }
+        
     }
 
 
@@ -170,12 +156,12 @@ $(function () {
 
     progress();
     if ($(window).scrollTop() >= $(".page-header").height() - $(".page-header .bg-primary").height()) {
-        $(".page-header .bg-primary").css("cssText", "background-color:rgb(55 65 178)!important");
+        $(".page-header .bg-primary").css("cssText", "background-color:rgb(0,0,0,0.50)!important");
     }
     $(window).scroll(function () {
         h = $(".page-header").height() - $(".page-header .bg-primary").height();
         if ($(window).scrollTop() >= h) {
-            $(".page-header .bg-primary").css("cssText", "background-color:rgb(55 65 178)!important");
+            $(".page-header .bg-primary").css("cssText", "background-color:rgb(0,0,0,0.50)!important");
         } else {
             $(".page-header .bg-primary").css("cssText", "background-color:rgba(0,0,0,0.20)!important");
         }
@@ -201,16 +187,16 @@ $(function () {
     $(".send-btn").on("click", mailsend);
 
     function mailsend() {
-        var subject = document.querySelector(".subject").value;  // 获取主题
-        var content = document.querySelector(".message").value;  // 获取内容
-        var recipient = "hi.pwc.email@gmail.com";  // 替换为实际收件人
+        var subject = document.querySelector(".subject").value;  
+        var content = document.querySelector(".message").value;  
+        var recipient = "hi.pwc.email@gmail.com"; 
     
-        // 替换空格和换行符
+
         content = content.replace(/ /g, '%20');
         content = content.replace(/\n/g, '%0d%0a');
     
         if (confirm("你确定要向 " + recipient + " 发送邮件吗?")) {
-            // 使用 location.href 以确保跳转生效
+
             location.href = "mailto:" + recipient + "?subject=" + subject + "&body=" + content;
         }
     }
@@ -218,16 +204,11 @@ $(function () {
 
 
 
-
-    // ---- 座右铭字缓出效果 -----
-    var text = "衣带渐宽终不悔，为伊消得人憔悴";
+    var text = "爱你所爱，行你所行，听从你心，无问西东";
     var length = text.length;
     let index = 0;
     var mottoArrs = config.motto;
-    // $.ajaxSettings.async = false;
-    // $.getJSON("./motto.json", function (data) {
-    //     mottoArrs = data;
-    // })
+
     var e1 = setInterval(insWords, 150);
     var e2 = 0;
 
@@ -260,15 +241,10 @@ $(function () {
 
     }
 
-    // ----- END ------
-
-
-
-    //--- 绑定按钮特效和文字淡入淡出 ---
     $(".self-intro").fadeIn(3000);
     $(".hvr-bounce-to-right").fadeIn(3000);
 
-    //----END---
+
 
 
 });

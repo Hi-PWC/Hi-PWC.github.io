@@ -58,7 +58,7 @@ html {
 }
 
 .page-header .navbar .navbar-collapse li:hover {
-    background: rgb(26, 145, 65);
+    background: rgb(121, 121, 121);
     transition: 0.55s;
     z-index: 2;
 }
